@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PawFile – My Pets</title>
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../CSS/sponsor-pets.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar panel -->
+    <aside class="sidebar">
+      <!-- Logo with paw icon -->
+      <div class="logo">
+        P<i class="fa-solid fa-paw"></i>wFile
+      </div>
+      
+      <!-- Navigation menu -->
+      <ul class="nav-menu">
+        <li>
+          <a href="../HTML/sponsor-profile.html">
+            <i class="fa-solid fa-user"></i> Profile
+          </a>
+        </li>
+        <li>
+          <a href="#" class="active">
+            <i class="fa-solid fa-paw"></i> Pets
+          </a>
+        </li>
+      </ul>
+
+      <!-- Sign out button -->
+      <button class="sign-out-btn">Sign Out</button>
+    </aside>
+
+    <!-- Main content area -->
+    <main class="main-content">
+      <!-- Welcome header -->
+      <h1 class="welcome-header">
+        My P<i class="fa-solid fa-paw"></i>wmily!
+      </h1>
+
+      <!-- Pet list container -->
+      <ul class="pet-list" id="petList">
+        <!-- Pet cards injected here by JavaScript -->
+      </ul>
+    </main>
+  </div>
+
+  <!-- Floating Add Button -->
+  <a href="pet-information.html" class="floating-add-btn">
+    Add
+    <span class="add-icon-circle">
+      <i class="fa-solid fa-plus"></i>
+    </span>
+  </a>
+
+  <!-- Custom JavaScript -->
+  <script src="../JS/sponsor-pets.js"></script>
+</body>
+</html>
