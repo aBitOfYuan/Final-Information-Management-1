@@ -55,16 +55,16 @@ body {
 
 /* Logo styles */
 .logo {
-  font-size: 2.2rem;
-  font-weight: bold;
-  color: #0F5AA6;
-  margin-bottom: 40px;
-  text-align: center;
-  letter-spacing: 1px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;                        /* space between letters and paw */
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #0F5AA6;
+    margin-bottom: 40px;
+    text-align: center;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
 }
 
 .logo i {

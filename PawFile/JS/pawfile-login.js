@@ -40,12 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
       sessionStorage.setItem('userRole', userRole);
       sessionStorage.setItem('userId', sponsorId);
 
-      alert(`${capitalize(userRole)} login successful! Redirecting to profile page...`);
+      // Show modal instead of alert
+      showLoginSuccessModal(`${capitalize(userRole)} login successful! Redirecting to profile page...`);
 
-      // Redirect after 1 second to sponsor-profile.html
       setTimeout(() => {
         window.location.href = '../HTML/sponsor-profile.html';
-      }, 1000);
+      }, 1500);
     } else {
       alert('Invalid ID or password.');
     }
@@ -53,5 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  // Add this function at the end of your file
+  function showLoginSuccessModal(message) {
+    const modal = document.getElementById('loginSuccessModal');
+    const msg = document.getElementById('modalMessage');
+    msg.textContent = message;
+    modal.style.display = 'flex';
   }
 });
