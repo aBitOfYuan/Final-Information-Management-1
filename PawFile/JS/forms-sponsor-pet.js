@@ -525,4 +525,110 @@ function closeModal() {
     window.location.href = '../HTML/pawfile-login.html';
 }
 
+// Utility: Calculate age from DOB
+function calculateAge(dob) {
+    if (!dob) return '';
+    const birth = new Date(dob);
+    const today = new Date();
+    let age = today.getFullYear() - birth.getFullYear();
+    const m = today.getMonth() - birth.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
+        age--;
+    }
+    return age;
+}
+
+// Utility: Calculate end date from start date and duration (in years, months, or days)
+function calculateEndDate(startDate, duration) {
+    if (!startDate || !duration) return '';
+    const date = new Date(startDate);
+    const years = parseInt(duration, 10);
+    if (isNaN(years)) return '';
+    date.setFullYear(date.getFullYear() + years);
+    return date.toISOString().slice(0, 10);
+}
+
+// Event delegation for dynamic pet/vaccine forms
+document.addEventListener('input', function(event) {
+    // 1. Age from DOB
+    if (event.target.matches('input[type="date"][name^="dob-"]')) {
+        const petNum = event.target.name.split('-')[1];
+        const ageInput = document.querySelector(`input[name="age-${petNum}"]`);
+        if (ageInput) {
+            ageInput.value = calculateAge(event.target.value);
+        }
+    }
+
+    // 2. End date from vaccine duration and vaccination date
+    if (
+        event.target.matches('input[name^="vaccine_duration-"]') ||
+        event.target.matches('input[name^="vaccination_date-"]')
+    ) {
+        // Extract petNum and vaccineNum
+        const parts = event.target.name.split('-');
+        const petNum = parts[1];
+        const vaccineNum = parts[2];
+        const durationInput = document.querySelector(`input[name="vaccine_duration-${petNum}-${vaccineNum}"]`);
+        const dateInput = document.querySelector(`input[name="vaccination_date-${petNum}-${vaccineNum}"]`);
+        const endDateInput = document.querySelector(`input[name="vaccination_end_date-${petNum}-${vaccineNum}"]`);
+        if (durationInput && dateInput && endDateInput) {
+            endDateInput.value = calculateEndDate(dateInput.value, durationInput.value);
+        }
+    }
+});
+
+// 3. Disable clinic name if no clinic history
+document.addEventListener('change', function(event) {
+    if (event.target.matches('input[type="radio"][name^="clinic-history-"]')) {
+        const petNum = event.target.name.split('-')[2];
+        const clinicNameInput = document.querySelector(`input[name="clinic-name-${petNum}"]`);
+        if (clinicNameInput) {
+            if (event.target.value === 'no' && event.target.checked) {
+                clinicNameInput.disabled = true;
+                clinicNameInput.value = '';
+            } else if (event.target.value === 'yes' && event.target.checked) {
+                clinicNameInput.disabled = false;
+            }
+        }
+    }
+
+    // 4. Disable vaccine symptoms if no vaccine reaction
+    if (event.target.matches('input[type="radio"][name^="vaccine-reaction-"]')) {
+        const parts = event.target.name.split('-');
+        const petNum = parts[2];
+        const vaccineNum = parts[3];
+        const symptomsInput = document.querySelector(`input[name="vaccine-symptoms-${petNum}-${vaccineNum}"]`);
+        if (symptomsInput) {
+            if (event.target.value === 'no' && event.target.checked) {
+                symptomsInput.disabled = true;
+                symptomsInput.value = '';
+            } else if (event.target.value === 'yes' && event.target.checked) {
+                symptomsInput.disabled = false;
+            }
+        }
+    }
+});
+
+// When adding new pet/vaccine forms, initialize the disabling logic
+function initializeDynamicFields(section) {
+    // Clinic history
+    section.querySelectorAll('input[type="radio"][name^="clinic-history-"]').forEach(radio => {
+        radio.dispatchEvent(new Event('change'));
+    });
+    // Vaccine reaction
+    section.querySelectorAll('input[type="radio"][name^="vaccine-reaction-"]').forEach(radio => {
+        radio.dispatchEvent(new Event('change'));
+    });
+}
+
+// Patch addPetForm to initialize fields
+const originalAddPetForm = addPetForm;
+addPetForm = function() {
+    originalAddPetForm();
+    // Get the last added pet form
+    const forms = document.querySelectorAll('.registration-form[data-pet]');
+    const lastForm = forms[forms.length - 1];
+    if (lastForm) initializeDynamicFields(lastForm);
+};
+
 
