@@ -1,0 +1,357 @@
+/*--------------------------------------------------------------------
+  FONT IMPORT & RESET
+--------------------------------------------------------------------*/
+/* Custom font */
+@font-face {
+  font-family: 'Jellee';
+  src: url('../Fonts/Jellee-Roman.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Reset box model and remove margin/padding */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base styles for body */
+body {
+  font-family: 'Jellee', Arial, sans-serif;
+  background-color: #f8f9fa !important;
+  color: #333 !important;
+  line-height: 1.6;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/*--------------------------------------------------------------------
+  CONTAINER FOR LAYOUT (sidebar + main content)
+--------------------------------------------------------------------*/
+.container {
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+
+/*--------------------------------------------------------------------
+  SIDEBAR
+--------------------------------------------------------------------*/
+.sidebar {
+  background-color: #F9C320;        /* Sidebar background color */
+  width: 220px;                     /* Fixed width */
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  position: sticky;                 /* Sticky sidebar */
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+/* Logo styles */
+.logo {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #0F5AA6;
+    margin-bottom: 40px;
+    text-align: center;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+}
+
+.logo i {
+  font-size: 1.8rem;
+  margin: 0 1px;
+}
+
+/* Sidebar navigation menu */
+.nav-menu {
+  list-style: none;
+  margin-bottom: auto;             /* Push sign out button to bottom */
+}
+
+.nav-menu li {
+  margin: 12px 0;
+}
+
+/* Navigation links */
+.nav-menu a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+/* Active nav item */
+.nav-menu a.active {
+  background-color: #0F5AA6;
+  color: #fff;
+}
+
+/* Icon spacing */
+.nav-menu a i {
+  margin-right: 10px;
+  font-size: 1.1rem;
+}
+
+/* Hover effect for nav links */
+.nav-menu a:hover:not(.active) {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Sign out button styles */
+.sign-out-btn {
+  background-color: #0F5AA6;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.3s;
+  margin-top: auto;               /* Stick at bottom */
+  margin-bottom: 15px;
+}
+
+.sign-out-btn:hover {
+  background-color: #0d4d8a;
+}
+
+/*--------------------------------------------------------------------
+  MAIN CONTENT
+--------------------------------------------------------------------*/
+.main-content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+}
+
+/* Header text */
+.welcome-header {
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+/*--------------------------------------------------------------------
+  PET LIST & PET CARD STYLES
+--------------------------------------------------------------------*/
+.pet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Single pet card container */
+.pet-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(44, 44, 44, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 32px;
+  margin-bottom: 18px;
+  transition: box-shadow 0.2s, background 0.2s;
+  cursor: pointer;
+}
+
+/* Hover highlight on pet card */
+.pet-card:hover {
+  box-shadow: 0 4px 16px rgba(44, 44, 44, 0.13);
+}
+
+/* Highlight class for additional emphasis */
+.pet-card.highlight {
+  background: #f0f8ff;
+}
+
+/* Pet name */
+.pet-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1769aa;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* Pet ID below name */
+.pet-id {
+  font-size: 0.98rem;
+  color: #222;
+  letter-spacing: 1px;
+}
+
+/* Container holding both remove and edit icons */
+.pet-card .icon-group {
+  display: flex;
+  align-items: center;
+  gap: 18px;                     /* Space between trash and edit icons */
+}
+
+/* Remove (trash) icon styles */
+.pet-card i.remove-icon {
+  font-size: 1.4rem;
+  color: #222;                   /* Black color for trash icon */
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Remove icon hover effect */
+.pet-card i.remove-icon:hover {
+  color: #555;                  /* Slightly lighter black on hover */
+  transform: scale(1.2);
+}
+
+/* Edit detail icon styles */
+.pet-card i.fa-arrow-up-right-from-square {
+  font-size: 1.3rem;
+  color: #111;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+
+/* Edit icon hover effect */
+.pet-card i.fa-arrow-up-right-from-square:hover {
+  color: #4caf50;
+  transform: scale(1.2) rotate(-10deg);
+}
+
+/*--------------------------------------------------------------------
+  FLOATING ADD BUTTON
+--------------------------------------------------------------------*/
+.floating-add-btn {
+  position: fixed;
+  right: 36px;
+  bottom: 36px;
+  background-color: #0F5AA6;
+  color: #fff;
+  border: none;
+  border-radius: 28px;
+  padding: 16px 28px 16px 22px;
+  font-size: 1.15rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 4px 18px rgba(15, 90, 166, 0.18);
+  cursor: pointer;
+  z-index: 200;
+  transition: background 0.2s;
+  text-decoration: none;          /* No underline */
+}
+
+.floating-add-btn:hover {
+  background-color: #0d4d8a;
+}
+
+.add-icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F9C320;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  margin-left: 4px;
+}
+
+.add-icon-circle i {
+  color: #0F5AA6;
+  font-size: 1.2rem;
+}
+
+/* Responsive: move button up on small screens */
+@media (max-width: 600px) {
+  .floating-add-btn {
+    right: 16px;
+    bottom: 16px;
+    padding: 12px 20px 12px 16px;
+    font-size: 1rem;
+  }
+  .add-icon-circle {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 1200px) {
+  /* No major changes */
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    margin-bottom: 0;
+    font-size: 1.8rem;
+  }
+
+  .nav-menu {
+    display: flex;
+    margin-bottom: 0;
+    gap: 12px;
+  }
+
+  .nav-menu li {
+    margin: 0;
+  }
+
+  .sign-out-btn {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 8px 16px;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+
+  .welcome-header {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .nav-menu {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: center;
+  }
+}
